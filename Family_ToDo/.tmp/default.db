@@ -1,0 +1,199 @@
+{
+  "data": {
+    "error": [
+      {
+        "status": "new",
+        "location": "PC-124",
+        "description": "Elromlott az egér",
+        "date": "2015-10-09T06:55:33.126Z",
+        "createdAt": "2015-10-09T06:55:33.127Z",
+        "updatedAt": "2015-10-09T06:55:33.127Z",
+        "id": 1
+      }
+    ],
+    "todo": [
+      {
+        "status": "new",
+        "location": "otthon",
+        "description": "letörölgetni",
+        "date": "2015-11-08T01:58:06.670Z",
+        "createdAt": "2015-11-08T01:58:06.671Z",
+        "updatedAt": "2015-11-08T01:58:06.671Z",
+        "id": 1
+      },
+      {
+        "status": "new",
+        "location": "otthon",
+        "description": "letörölgetni",
+        "date": "2015-11-08T02:03:56.724Z",
+        "createdAt": "2015-11-08T02:03:56.725Z",
+        "updatedAt": "2015-11-08T02:03:56.725Z",
+        "id": 2
+      }
+    ],
+    "user": [
+      {
+        "surname": "k",
+        "forename": "k",
+        "neptun": "SHSV",
+        "password": "valami",
+        "avatar": "",
+        "role": "riporter",
+        "createdAt": "2015-10-16T07:10:19.303Z",
+        "updatedAt": "2015-10-16T07:10:19.303Z",
+        "id": 1
+      },
+      {
+        "surname": "Lekly",
+        "forename": "Dani",
+        "neptun": "SE3ESL",
+        "password": "$2a$10$LreUM/wwknDMtyFJ.4gQRerZ1AY5fgxhtKNrWfZXLRY.7dd3WjSBK",
+        "avatar": "",
+        "role": "riporter",
+        "createdAt": "2015-10-16T07:36:57.051Z",
+        "updatedAt": "2015-10-16T07:36:57.051Z",
+        "id": 2
+      },
+      {
+        "surname": "Kovács",
+        "forename": "Anyuka",
+        "familyNickname": "anya",
+        "password": "$2a$10$YZVtXJPu/sPdyt0sq8IRaegR2xwZN4v9C56MNHmzbLZvGNdecv8bi",
+        "avatar": "",
+        "familyRole": "kid",
+        "createdAt": "2015-11-07T14:46:26.577Z",
+        "updatedAt": "2015-11-07T14:46:26.577Z",
+        "id": 3
+      }
+    ]
+  },
+  "schema": {
+    "error": {
+      "date": {
+        "type": "datetime"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "new",
+          "assigned",
+          "success",
+          "rejected",
+          "pending"
+        ]
+      },
+      "location": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "user": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "user"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "todo": {
+      "date": {
+        "type": "datetime"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "new",
+          "assigned",
+          "success",
+          "rejected",
+          "pending"
+        ]
+      },
+      "location": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "user": {
+        "type": "integer",
+        "model": "user",
+        "foreignKey": true,
+        "alias": "user"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "familyNickname": {
+        "type": "string",
+        "unique": true
+      },
+      "password": {
+        "type": "string"
+      },
+      "surname": {
+        "type": "string"
+      },
+      "forename": {
+        "type": "string"
+      },
+      "avatar": {
+        "type": "string"
+      },
+      "familyRole": {
+        "type": "string",
+        "enum": [
+          "kid",
+          "parent"
+        ],
+        "defaultsTo": "kid"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "error": {
+      "id": 1
+    },
+    "user": {
+      "id": 3
+    },
+    "todo": {
+      "id": 2
+    }
+  }
+}
