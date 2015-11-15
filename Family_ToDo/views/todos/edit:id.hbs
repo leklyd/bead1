@@ -1,0 +1,77 @@
+<div class="page-header">
+    <h1>Egy elvégzendő dolog módosítása</h1>
+</div>
+
+<form class="form-horizontal" method="post">
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Időpont</th>
+                <th><label for="statusz" class="col-lg-2 control-label">Státusz</label></th>
+                <th><label for="helyszin" class="col-lg-2 control-label">Helyszín</label></th>
+                <th><label for="leiras" class="col-lg-2 control-label">Leírás</label></th>
+            </tr>   
+        </thead>
+        <tbody>
+            <fieldset>
+                <tr>
+                    <td>{{todo.date}}</td>
+                    <td>
+                        <div class="form-group
+                            {{#if validationErrors.statusz}}
+                                has-error
+                            {{/if}}
+                        ">
+                            <div class="col-lg-10">
+                                <select class="form-control" id="statusz" name="statusz" type="text">
+                                    <option value="new">new</option>
+                                    <option value="assigned">assigned</option>
+                                    <option value="done">done</option>
+                                    <option value="checked">checked</option>
+                                    <option value="pending">pending</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group
+                            {{#if validationErrors.helyszin}}
+                                has-error
+                            {{/if}}
+                        ">
+                            <div class="col-lg-10">
+                                <input class="form-control" id="helyszin" name="helyszin" type="text" value="{{todo.location}}">
+                                {{#if validationErrors.helyszin}}
+                                    <span class="help-block">{{validationErrors.helyszin.msg}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group
+                            {{#if validationErrors.leiras}}
+                                has-error
+                            {{/if}}
+                        ">
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="3" id="leiras" name="leiras">{{todo.description}}</textarea>
+                                <span class="help-block">Meg kell adni a helyszínt, ha pedig konkrét helységben van teendő, akkor azt is.</span>
+                                {{#if validationErrors.leiras}}
+                                    <span class="help-block">{{validationErrors.leiras.msg}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <td><button type="reset" class="btn btn-default">Cancel</button></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button0></td>
+                        </div>
+                    </div>
+                </tr>
+            </fieldset>
+        </tbody>
+    </table>
+</form>

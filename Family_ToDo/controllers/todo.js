@@ -26,16 +26,30 @@ function decorateTodos(todoContainer) {
     });
 }
 
+function findRightTodos(todoContainer, familyName) {
+    return todoContainer.map(function (e) {
+        console.log(e.userFamilyName);
+        if (e.userFamilyName === familyName) {
+            //console.log(e);
+            console.log("ide bejut");
+            return e;
+        }
+    });
+}
+
 router.get('/list', function (req, res) {
+    var familyName = req.user.surname;
+    console.log(familyName);
     req.app.models.todo.find().then(function (todos) {
-        console.log(todos);
+        //console.log(todos);
         //megjelenítés
         res.render('todos/list', {
-            todos: decorateTodos(todos),
+            todos: findRightTodos(decorateTodos(todos), familyName),
             messages: req.flash('info'),
         });
     });
 });
+
 router.get('/new', function (req, res) {
     var validationErrors = (req.flash('validationErrors') || [{}]).pop();
     var data = (req.flash('data') || [{}]).pop();
@@ -65,7 +79,9 @@ router.post('/new', function (req, res) {
         req.app.models.todo.create({
             status: 'new',
             location: req.body.helyszin,
-            description: req.body.leiras
+            description: req.body.leiras,
+            user: req.user,
+            userFamilyName: req.user.surname
         })
         .then(function (todo) {
             req.flash('info', 'Teendő sikeresen felvéve!');
@@ -91,8 +107,6 @@ router.get('/edit:id', function (req, res) {
 });
 router.post('/edit:id', function (req, res) {
     // adatok ellenőrzése
-    req.checkBody('statusz', 'Hibás státusz').notEmpty().withMessage('Kötelező megadni!');
-    //req.sanitizeBody('helyszin').escape();
     req.checkBody('helyszin', 'Hibás helyszín').notEmpty().withMessage('Kötelező megadni!');
     req.sanitizeBody('leiras').escape();
     req.checkBody('leiras', 'Hibás leírás').notEmpty().withMessage('Kötelező megadni!');
@@ -115,7 +129,9 @@ router.post('/edit:id', function (req, res) {
                 req.app.models.todo.create({
                     status: req.body.statusz,
                     location: req.body.helyszin,
-                    description: req.body.leiras
+                    description: req.body.leiras,
+                    user: req.user,
+                    userFamilyName: req.user.surname
                 })
                 .then(function (todo) {
                     req.flash('info', 'Teendő sikeresen módosítva!');
@@ -130,7 +146,28 @@ router.post('/edit:id', function (req, res) {
     }
 });
 
-router.get('/delete:id', function (req, res) {
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login');
+}
+
+function andRestrictTo(role) {
+    return function(req, res, next) {
+        if (req.user.role == role) {
+            next();
+        } else {
+            req.flash('info', 'Unauthorized!');
+            res.redirect('/todos/list');
+        }
+    };
+}
+
+/*
+app.get('/todos/delete:id', ensureAuthenticated, andRestrictTo('parent'), function(req, res) {
+    res.end('parent');
+});
+*/
+router.get('/delete:id', ensureAuthenticated, andRestrictTo('parent'), function(req, res) {
     var id = req.params.id;
     req.app.models.todo.findOne({ id: id}).then(function (todo) {
         res.render('todos/delete:id', {

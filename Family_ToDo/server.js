@@ -118,6 +118,7 @@ app.use('/todos', ensureAuthenticated, todoController);
 app.use('/login', loginController);
 //app.use('/comment', commentController);
 
+/*
 function andRestrictTo(role) {
     return function(req, res, next) {
         if (req.user.role == role) {
@@ -131,6 +132,7 @@ function andRestrictTo(role) {
 app.get('/todos/delete:id', ensureAuthenticated, andRestrictTo('parent'), function(req, res) {
     res.end('parent');
 });
+*/
 
 // ORM indítása
 orm.initialize(waterlineConfig, function(err, models) {

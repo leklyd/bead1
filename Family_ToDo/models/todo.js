@@ -24,6 +24,9 @@ module.exports = {
         user: {
             model: 'user',
         },
+        userFamilyName: {
+            type: 'string',
+        },
         /*
         comments: {
             collection: 'comment',
