@@ -55,7 +55,7 @@ végpontok:
 /comment : megjegyzés
 A végpontok elérése és egyik végponttól a másik végpontig való eljutás a controllers mappában lévő .js állományokkal történik. Ezért vannak a főoldalhoz, a bejelentkezéshez, a teendőkhöz és a kommentekhez egy-egy kontroller.
 2.	Osztálymodell
-![dbrelationships](docs/images/dbrelationships.jpg)
+![dbrelationships](Family_ToDo/docs/images/dbrelationships.jpg)
  
 3.	Dinamikus működés
 i.	Szekvenciadiagram

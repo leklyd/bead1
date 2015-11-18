@@ -5,11 +5,22 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.1",
+    "chai": "^3.4.1",
     "connect-flash": "^0.1.1",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
     "express-validator": "^2.17.1",
-    "hbs": "^3.1.1"
+    "hbs": "^3.1.1",
+    "mocha": "^2.3.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "sails-disk": "^0.10.8",
+    "sails-memory": "^0.10.5",
+    "sails-postgresql": "^0.10.17",
+    "should": "^7.1.1",
+    "waterline": "^0.10.27",
+    "zombie": "^4.2.1"
   }
 }
