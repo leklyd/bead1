@@ -61,38 +61,38 @@ Gyűjtsük össze a követelményeket a Family ToDo alkalmazásról. Nézzük me
 ## Tervezés
 
 ### 1.	Architektúra terv
--Family_ToDo:
-    *bower.json
-    *fooldal.html
-    *package.json
-    *server.js
--config:
-    *waterline.js
--controllers:
-    *comment.js
- 	*index.js
- 	*login.js
- 	*todo.js
--models:
-    *comment.js
- 	*todo.js
- 	*user.js
--node_modules
--public
--test:
-    *usermodel.test.js
- 	*zombie.test.js
--views:
-    *index.hbs
- 	*layout.hbs
- 	-login:
- 	    *index.hbs
- 		*signup.hbs
- 	-todos:
- 	    *delete:id.hbs
- 		*edit:id.hbs
- 		*list.hbs
- 		*new.hbs
+- Family_ToDo:
+    * bower.json
+    * fooldal.html
+    * package.json
+    * server.js
+- config:
+    * waterline.js
+- controllers:
+    * comment.js
+ 	* index.js
+ 	* login.js
+ 	* todo.js
+- models:
+    * comment.js
+ 	* todo.js
+ 	* user.js
+- node_modules
+- public
+- test:
+    * usermodel.test.js
+ 	* zombie.test.js
+- views:
+    * index.hbs
+ 	* layout.hbs
+ 	- login:
+ 	    * index.hbs
+ 		* signup.hbs
+ 	- todos:
+ 	    * delete:id.hbs
+ 		* edit:id.hbs
+ 		* list.hbs
+ 		* new.hbs
 
 ### 2. Oldaltérkép
 
@@ -129,6 +129,7 @@ A végpontok elérése és egyik végponttól a másik végpontig való eljutás
 ###	Fejlesztői környezet bemutatása:
 
 A fejleszői környezetetként a Cloud9 nyújtott segítséget a következőkkel:
+
     - Könnyű áttekinthetőség a könyvtárszerkezet baloldali elhelyezésében.
     - Jó átláthatóság a kódszerkesztőjének köszönhetően, jó blokk és szövegkiemelés.
     - Könnyen futtatható teszt fájlok.
@@ -137,15 +138,20 @@ A fejleszői környezetetként a Cloud9 nyújtott segítséget a következőkkel
 ## Tesztelés
 
 Automatikus tesztek szükségesek. Nem kell teljeskörű tesztelés, a hallgató mutassa meg, hogy képes ilyen tesztek írására.
+
 1.	Egységtesztek: legalább 1 adatmodell tesztelése: usermodel.test.js:
+
     * A usermodel.test.js-ben azt teszteljük le, hogy egyáltalán működik-e.
+
         - Leteszteljük, hogy létre tudunk-e hozni egy felhasználót.
 		- Leteszteljük, hogy utána meg tudjuk-e találni ezt a felhasználót a Családi beceneve alapján.
 		- Leteszteljük, hogy tudjuk-e módosítani az adott felhasználót.
 		- Leteszteljük, hogy hibát ad-e vissza, ha rosszul adtunk meg adatot.
 
-2.	Funkcionális felületi tesztek: legalább 1 folyamat tesztelése zombie.js használatával
+2.	Funkcionális felületi tesztek: legalább 1 folyamat tesztelése zombie.js használatával:
+
     * A zombie.test.js-ben azt teszteljük le, hogy jól működik-e az új teendő felvétele funkció.
+
         - Leteszteljük, hogy meg tudjuk-e látogatni egyáltalán a kezdőlapot.
 		- Leteszteljük, hogy meg tudjuk-e látogatni az új teendő felvétele oldalt.
 		- Leteszteljük, hogy oda lép-e a /login bejelentkező oldalra.
