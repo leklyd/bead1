@@ -43,7 +43,7 @@ Gyűjtsük össze a követelményeket a Family ToDo alkalmazásról. Nézzük me
 		* Gyerek: Meglátogathatja az oldalt. Megnézheti a teendők listáját. Felvehet új teendőket, és módosíthat is már meglévő teendőket. Azonban teendőket nem törölhet.
 		* Szülő:  Meglátogathatja az oldalt. Megnézheti a teendők listáját. Felvehet új teendőket, módosíthatja őket és törölheti is azokat.
 	2. Használati eset diagramok: a szerepkörök és az elérhető funkiók kapcsolatát jelenítik meg:
-		* ![hasznalatiesetdiagram](Family_ToDo/docs/images/hasznalatiesetdiagram.jpg)
+		* ![hasznalatiesetdiagram](bead1/docs/images/hasznalatiesetdiagram.jpg)
 	3. Folyamatok pontos menete: legalább 1 folyamat kifejtése.
         ```
 		> Egy vendég ellátogat a kezdőoldalra. Rákattint a Bejelentkezés feliratra, amely elnavigálja a a vendéget a /login oldalra.
@@ -121,7 +121,7 @@ A végpontok elérése és egyik végponttól a másik végpontig való eljutás
 
 ### 4.	Osztálymodell
 
-![dbrelationships](Family_ToDo/docs/images/dbrelationships.jpg)
+![dbrelationships](bead1/docs/images/dbrelationships.jpg)
 
 
 ## Implementáció
