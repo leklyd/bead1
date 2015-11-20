@@ -24,13 +24,16 @@ Gyűjtsük össze a követelményeket a Family ToDo alkalmazásról. Nézzük me
 		* A már felvett teendőket lehessen törölni.
 		* Lehessen megjegyzést fűzni teendőkhöz.
 		* A bejelentkezett felhasználók képesek legyenek kijelentkezni.
-	2. Nem funkcionális követelmények:
 		* Jelezze az alkalmazás, hogy ki a bejelentkezett felhasználó.
 		* Jelezze az alkalmazás, ha regisztrációnál hibás adadtot viszünk be.
 		* Jelezze az alkalmazás, ha új teendő felvitelénél hibásan töltöm ki az adatokat.
 		* Jelezze az alkalmazás, ha az új teendőt sikeresen felvettem.
 		* Jelezze az alkalmazás, ha az új teendőt sikeresen módosítottam.
 		* Jelezze az alkalmazás, ha az új teendőt sikeresen töröltem.
+	2. Nem funkcionális követelmények:
+		* Legyen az alkalmazás felhasználóbarát, legyen ergonomikus az elrendezése és a kinézete.
+		* Legyen az alkalmazásunknak gyors a működése.
+		* Legyen az alkalmazásunknak biztonságos a működés: jelszavak tárolása, funkciókhoz való hozzáférés.
 
 2. Szakterületi fogalomjegyzék: ha vannak speciális fogalmak, akkor ezeket itt lehet összegyűjteni és magyarázni.
 	* Todo: A szó jelentése az, hogy csinálni, tenni. Tehát ez egy olyan fogalom, amellyel egy olyan listát jelölünk, amelyre följegyeztük azokat a tevékenységeket, amelyeket meg akarunk csinálni a közeljövőben.
@@ -60,7 +63,8 @@ Gyűjtsük össze a követelményeket a Family ToDo alkalmazásról. Nézzük me
 
 ## Tervezés
 
-### 1.	Architektúra terv
+### 1.	Architektúra terv:
+
 - Family_ToDo:
     * bower.json
     * fooldal.html
@@ -94,35 +98,62 @@ Gyűjtsük össze a követelményeket a Family ToDo alkalmazásról. Nézzük me
  		* list.hbs
  		* new.hbs
 
-### 2. Oldaltérkép
+### 2. Oldaltérkép:
 
-1. Kezdőoldal:
-    * Bejelentkezés
-    * Regisztráció
-2. Családi teendők listája:
-    * Új teendő felvétele
-    * Teendő módosítása
-    * Megjegyzés
-    * Kilépés
+1. Vendég:
+	1. Kezdőoldal:
+	    * Bejelentkezés
+	    * Regisztráció
+
+2. Gyerek:
+	1. Kezdőoldal:
+	    * Bejelentkezés
+	    * Regisztráció
+	2. Családi teendők listája:
+	    * Új teendő felvétele
+	    * Teendő módosítása
+	    * Megjegyzés
+	    * Kilépés
+
+3. Szülő:
+	1. Kezdőoldal:
+	    * Bejelentkezés
+	    * Regisztráció
+	2. Családi teendők listája:
+	    * Új teendő felvétele
+	    * Teendő módosítása
+	    * Teendő törlése
+	    * Megjegyzés
+	    * Kilépés
 
 ### 3. Végpontok:
 
-1. / : index
-2. /logout : kijelentkezés és visszajutás az index-hez
-3. /todos/list : teendők listája
-4. /todos/new : új teendő felvétele
-5. /todos/edit:id : egy teendő szerkesztése
-6. /todos/delete:id : egy teendő törlése
-7. /login : bejelentkezési oldal
-8. /login/signup : regisztrációs űrlap
-9. /comment : megjegyzés
+1.  GET  / : kezdőlap
+2.  GET  /logout : kijelentkezés és visszajutás az index-hez
+3.  GET  /login : bejelentkezési oldal
+4.  POST /login : bejelentkezési adatok elküldése
+5.  GET  /todos/list : teendők listája
+6.  GET  /todos/new : új teendő felvétele
+7.  POST /todos/new : új teendő felvételéhez az adatok elküldése
+8.  GET  /todos/edit:id : egy teendő szerkesztése
+9.  POST /todos/edit:id : egy teendő szerkesztett adatainak az elküldése
+10. POST /todos/edit:id/comment : új megjegyzés
+11. GET  /todos/delete:id : egy teendő törlése
+12. POST /todos/delete:id : egy adott teendő törléséhez szükséges adatok elküldése
+13. GET  /login/signup : regisztrációs űrlap
+14. POST /login/signup : regisztráció űrlap kitöltött adatainak az elküldése
 
 A végpontok elérése és egyik végponttól a másik végpontig való eljutás a controllers mappában lévő .js állományokkal történik. Ezért vannak a főoldalhoz, a bejelentkezéshez, a teendőkhöz és a kommentekhez egy-egy kontroller.
 
-### 4.	Osztálymodell
+### 4.	Osztálymodell:
 
 ![dbrelationships](bead1/docs/images/dbrelationships.jpg)
 
+### 5. Teendők állapotai:
+
+```
+> Új -> Hozzárendelve -> Elvégezve -> Leellenőrizve
+```
 
 ## Implementáció
  
@@ -170,18 +201,35 @@ Automatikus tesztek szükségesek. Nem kell teljeskörű tesztelés, a hallgató
 ```
 > Mielőtt elkezdjük használni a Family ToDo honlapot el kell indítanunk a postgresql adatbázist, kapcsolóni kell hozzá.
 Ezután már látogatható az oldal. Tehát a kezdő képernyőt egy vendég is nézegetheti, ahol talál leírást arról, hogy mire is való ez az oldal, mire lehet/érdemes használni.
-Szóval, ha valaki szeretné használni is, és valódi teendőit följegyezgetni, akkor először is be kell lépni az oldalra. Ehhez a jobb fölső sarokban lévő Bejelentkezés gombra kell kattintani. Ha már regisztrálva vagyunk, akkor bejelentkezéshez írjuk be a családi becenevünket és jelszavunkat, majd kattintsunk a Submit gombra.
+Szóval, ha valaki szeretné használni is, és valódi teendőit följegyezgetni, akkor először is be kell lépni az oldalra. Ehhez a jobb fölső sarokban lévő Bejelentkezés gombra kell kattintani.
+Ha már regisztrálva vagyunk, akkor bejelentkezéshez írjuk be a családi becenevünket és jelszavunkat, majd kattintsunk a Submit gombra.
 Abban az esetben viszont, ha nem vagyunk még regisztrálva, akkor kattintsunk a Regisztráció gombra és adjuk meg a következő adatainkat:
--Családnév, -Keresztnév, -Családi becenév, -Jelszó, -Avatar URL. Ha ezekkel megvagyunk, akkor kattintsunk a Submit gombra. Ekkor már a megadott Családi becenevünkkel és jelszavunkkal be tudunk jelentkezni a Bejelentkezés oldalon.
+-Családnév, -Keresztnév, -Családi becenév, -Jelszó, -Avatar URL. Ha ezekkel megvagyunk, akkor kattintsunk a Submit gombra.
+Ekkor már a megadott Családi becenevünkkel és jelszavunkkal be tudunk jelentkezni a Bejelentkezés oldalon.
 Bejelentkezve a fönti menüben megjelenik, hogy Üdv, "felhasználónév"! és egy Kilépés opció, melyre kattintva kiléptetjük a felhasználót az alkalmazásból és vissza visszük a kezdőoldalra.
-Viszont, ha maradunk bejelentkezve, akkor láthatjuk a család teendőit listába szedve. Minden egyes elvégzendőről látjuk, hogy mikor lett a listához adva; mi a státusza, tehát hogy újonnan felvett, vagy már elkészített, vagy esetleg már le is ellenőrzött; a helyszínét, hogy hol kell a feladatot elvégezni; a leírásást, hogy pontosan mit is kell csinálni és további lehetőségeket, melyek sorban:
+Viszont, ha maradunk bejelentkezve, akkor láthatjuk a család teendőit listába szedve.
+Minden egyes elvégzendőről látjuk, hogy mikor lett a listához adva; mi a státusza, tehát hogy újonnan felvett, vagy már elkészített, vagy esetleg már le is ellenőrzött; a helyszínét, 
+hogy hol kell a feladatot elvégezni; a leírásást, hogy pontosan mit is kell csinálni és további lehetőségeket, melyek sorban:
 - Teendő módosítása, - Megjegyzés, - Teendő törlése.
-Az oldal legalján láthatunk egy "Új teendő felvitele" gombot, amelyre rákattintva eljutunk egy Új teendő felvétele oldalra, ahol űrlapként kitöltve a "Helyszín" és "Leírás" feliratokkal ellátott mezőket, és a Submit gombra rákattintva vehetünk fel a listára új teendőket. Ekkor, ha mindent sikeresen kitöltöttünk, akkor visszavisz minket a listához és megjelenik egy felirat, hogy "Új teendő sikeresen felvéve!". Ekkor az újonnan feljegyzett feladat már a listában van.
+Az oldal legalján láthatunk egy "Új teendő felvitele" gombot, amelyre rákattintva eljutunk egy Új teendő felvétele oldalra, 
+ahol űrlapként kitöltve a "Helyszín" és "Leírás" feliratokkal ellátott mezőket, és a Submit gombra rákattintva vehetünk fel a listára új teendőket.
+Ekkor, ha mindent sikeresen kitöltöttünk, akkor visszavisz minket a listához és megjelenik egy felirat, hogy "Új teendő sikeresen felvéve!".
+Ekkor az újonnan feljegyzett feladat már a listában van.
 Ha viszont az Új teendő felvétele oldalon a Cancel gombra kattintunk, akkor a már beírt adatokat visszatörli/reset-eli.
 A Családi ToDo feliratra kattintva visszajuthatunk a Teendők listája oldalra. Itt a már említett lehetőségeket választhatjuk minden egyes teendőre.
-Tehát egy már meglévő teendőt módosíthatunk a mellette lévő "Teendő módosítása" gombbal, amely elvisz minket egy "Egy elvégzendő dolog módosítása" oldalra, ahol láthatjuk az adott teendő adatait, mint például a Felvételének időpontját, a Státuszát, a Helyszínét és a Leírását. Ez ismételten egy űrlap, amely már előre ki van töltve a tárolt adatokkal, de változtathatunk is rajtuk. A Submit gombra kattintva véglegesíthetjük a változtatást, mely ismét visszavisz minket a Teendő listája oldalra, ha megfelelően töltöttük ki az adatokat, és ekkor megjelenik az oldal tetején az a felirat, hogy "A teendő sikeresen módosítva!". Ha az "Egy elvégzendő dolog módosítása" oldalon vagyunk, de meggondoltuk magunkat és mégsem szeretnénk módosítani az adott teendőn, akkor van rá lehetőségünk. Mégpedig, ha a "Családi ToDo" feliratra kattintunk, akkor visszajutunk a Teendők listája oldalra mindenféle változtatás nélkül. Méh egy lehetőséget nyújt a Meglévő teendő módosítása oldalon a "Cancel" gomb. Ez akkor jöhet jól, hogyha átírtuk a teendőnek valamelyik adatját, de menet közben rájövünk, hogy amire változtattuk az mégsem jó, akkor a szóban forgó gomb semlegesíti a változtatást.
+Tehát egy már meglévő teendőt módosíthatunk a mellette lévő "Teendő módosítása" gombbal, amely elvisz minket egy "Egy elvégzendő dolog módosítása" oldalra, 
+ahol láthatjuk az adott teendő adatait, mint például a Felvételének időpontját, a Státuszát, a Helyszínét és a Leírását. Ez ismételten egy űrlap, 
+amely már előre ki van töltve a tárolt adatokkal, de változtathatunk is rajtuk. A Submit gombra kattintva véglegesíthetjük a változtatást, 
+mely ismét visszavisz minket a Teendő listája oldalra, ha megfelelően töltöttük ki az adatokat, és ekkor megjelenik az oldal tetején az a felirat, 
+hogy "A teendő sikeresen módosítva!". Ha az "Egy elvégzendő dolog módosítása" oldalon vagyunk, de meggondoltuk magunkat 
+és mégsem szeretnénk módosítani az adott teendőn, akkor van rá lehetőségünk. Mégpedig, ha a "Családi ToDo" feliratra kattintunk, 
+akkor visszajutunk a Teendők listája oldalra mindenféle változtatás nélkül. Méh egy lehetőséget nyújt a Meglévő teendő módosítása oldalon a "Cancel" gomb.
+Ez akkor jöhet jól, hogyha átírtuk a teendőnek valamelyik adatját, de menet közben rájövünk, hogy amire változtattuk az mégsem jó, akkor a szóban forgó gomb semlegesíti a változtatást.
 Ezenkívül van még lehetőségünk minden egyes teendőhöz külön megjegyzéseket írni, az egyes teendők melletti "Megjegyzés" gombra kattintva. Itt egy mezőbe felírhatjuk észrevételeinket, gondolatainkat.
-Végezetül a Teendők listája oldalán van még lehetőségünk az egyes feladatok törlésére a "Teendő törlése" gombra kattintva. Ez elnavigál minket egy olyan oldalra, amely ad a felhasználónak egy leírást az adott teendő adatairól. Itt a "Törlés" gombra kattintva visszajutunk Teendők listája oldalra, törlődik az adott feladat a listából, és kapunk egy feliratot, hogy "A teendő sikeresen törölve!". Ha viszont meggondoltuk magunkat, és mégsem szeretnénk törölni az adott teendőt, akkor a "Mégse" gombra kattintva visszaugrunk Teendők listája oldalra törlés nélkül.
+Végezetül a Teendők listája oldalán van még lehetőségünk az egyes feladatok törlésére a "Teendő törlése" gombra kattintva.
+Ez elnavigál minket egy olyan oldalra, amely ad a felhasználónak egy leírást az adott teendő adatairól.
+Itt a "Törlés" gombra kattintva visszajutunk Teendők listája oldalra, törlődik az adott feladat a listából, és kapunk egy feliratot, hogy "A teendő sikeresen törölve!".
+Ha viszont meggondoltuk magunkat, és mégsem szeretnénk törölni az adott teendőt, akkor a "Mégse" gombra kattintva visszaugrunk Teendők listája oldalra törlés nélkül.
 ```
 
 ## PostgreSQL konfigurálása Cloud9-on:

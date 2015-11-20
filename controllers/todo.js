@@ -8,14 +8,12 @@ var statusTexts = {
     'assigned': 'Hozzárendelve',
     'done': 'Elvégezve',
     'checked': 'Ellenőrízve',
-    'pending': 'Felfüggesztve',
 };
 var statusClasses = {
     'new': 'danger',
     'assigned': 'info',
     'done': 'success',
     'checked': 'default',
-    'pending': 'warning',
 };
 
 function decorateTodos(todoContainer) {
@@ -31,7 +29,7 @@ function findRightTodos(todoContainer, familyName) {
         console.log(e.userFamilyName);
         if (e.userFamilyName === familyName) {
             //console.log(e);
-            console.log("ide bejut");
+           // console.log("ide bejut");
             return e;
         }
     });
