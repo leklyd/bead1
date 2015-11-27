@@ -10,7 +10,7 @@ module.exports = {
         },
         status: {
             type: 'string',
-            enum: ['new', 'assigned', 'done', 'checked', 'pending'],
+            enum: ['new', 'assigned', 'done', 'checked'],
             required: true,
         },
         location: {

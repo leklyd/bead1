@@ -15,6 +15,7 @@ var config = {
     connections: {
         default: {
             adapter: 'disk',
+            poolSize: 20,
         },
         memory: {
             adapter: 'memory'
@@ -29,7 +30,8 @@ var config = {
             user: 'ubuntu',
             password: 'ubuntu',
             poolSize: 20,
-        }
+        },
+        poolSize: 20,
     },
     defaults: {
         migrate: 'safe'
