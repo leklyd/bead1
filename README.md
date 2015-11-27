@@ -4,11 +4,11 @@ This is my first repository on GitHub.
 # Dokumentáció
 
 A dokumentáció a következő részeket tartalmazza:
-•	Követelmény
-•	Tervezés
-•	Implementáció
-•	Tesztelés
-•	Felhasználói dokumentáció
+*	Követelmény
+*	Tervezés
+*	Implementáció
+*	Tesztelés
+*	Felhasználói dokumentáció
 
 ## Követelményanalízis
 
@@ -234,22 +234,21 @@ Ha viszont meggondoltuk magunkat, és mégsem szeretnénk törölni az adott tee
 
 ## PostgreSQL konfigurálása Cloud9-on:
 
-`# indítás`
+- `# indítás`
 sudo service postgresql start
-`# belépés`
+- `# belépés`
 sudo sudo -u postgres psql
-`# felhasználó létrehozása az adatbázisban`
+- `# felhasználó létrehozása az adatbázisban`
 create user ubuntu password 'ubuntu';
-`# adatbázis létrehozása`
+- `# adatbázis létrehozása`
 create database tickets owner ubuntu;
-`# adatbázisok listázása`
+- `# adatbázisok listázása`
 \list
-`# kilépés`
+- `# kilépés`
 \q
-
-`# adatbázis kiválasztása`
+- `# adatbázis kiválasztása`
 \connect tickets
-`# táblák listázása`
+- `# táblák listázása`
 \dt
 
 ## Kódszervezés:

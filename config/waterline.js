@@ -28,6 +28,7 @@ var config = {
             host: 'localhost',
             user: 'ubuntu',
             password: 'ubuntu',
+            poolSize: 20,
         }
     },
     defaults: {
